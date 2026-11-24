@@ -1,0 +1,43 @@
+from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello, World!"
+
+@app.route("/")
+def home():
+    return "Home page"
+
+@app.route("/about")
+def about():
+    return "About us"
+
+@app.route("/user/<nama>")
+def profile(nama):
+    return f"Hello, {nama}!"
+
+@app.route("/post/<int:post_id>")
+def post(post_id):
+    return f"Post #{post_id}"
+
+
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/greet", methods=["POST"])
+def greet():
+    name = request.form.get("name")
+    if not name:
+        name = "Anonim"
+
+    return f"<h2>Halo, {name}! Selamat datang di Flask First App 🚀</h2>"
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
